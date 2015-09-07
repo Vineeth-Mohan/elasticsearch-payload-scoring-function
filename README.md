@@ -16,8 +16,12 @@ misconceptions, I would be happy to get your message.
 ## Installation
 
 mvn clean install -DskipTests
+
 The distribution would be present in target/releases
+
 unzip and copy the zip file in there to the plugin folder
+
+
 
 Do not forget to restart the node after installing.
 
@@ -26,7 +30,7 @@ Do not forget to restart the node after installing.
 
 ## Issues
 
-All feedback is welcome! If you find issues, please post them at [Github](https://github.com/jprante/elasticsearch-payload/issues)
+All feedback is welcome! If you find issues, please post them at [Github](https://github.com/Vineeth-Mohan/elasticsearch-payload-scoring-function/issues)
 
 
 Example
