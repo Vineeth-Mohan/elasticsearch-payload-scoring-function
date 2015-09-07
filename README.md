@@ -2,8 +2,7 @@
 
 Payload function plugin for function score query in Elasticsearch
 
-Note, this project is just a demo and is not working as I expected. If you find bugs, errors, or
-misconceptions, I would be happy to get your message.
+The payload value is taken from termVectors if enabled ( This is faster ) or from the reverse index.
 
 ## Versions
 
