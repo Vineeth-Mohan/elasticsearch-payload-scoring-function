@@ -12,6 +12,40 @@ The payload value is taken from termVectors if enabled ( This is faster ) or fro
 | 1.7.0          | 1.7.0.0        | Sept 7, 2015 |
 
 
+## Sample usecase
+
+Sample documentA <br/>
+	{
+	"name" : "chilli chicken",
+	"tasteTypes" : [ "spicy" , "salty" , "gravy" ]   // ( A lot of gravy and very spicy )
+	}
+
+Sample documentB <br/>
+	{
+	"name" : "Chicken with nuts",
+	"tasteTypes" : [ "spicy" , "sweet" , "gravy" ]  // ( Thick gravy bu not very spicy )
+	}
+
+Here as you can see the level of spicy and gravy is different for different dishes.
+So when i search for dishes which are spicy , it makes sense to show "chilli chicken" above "chicken with nuts" as the former is more spicy.
+
+In such cases , using the plugin i made , we can give search as follows -
+
+	{
+	  "query" : {
+	           "function_score" : {
+	                    "query" : {    "term" : "spicy" },
+	                     "functions" : [
+	                            "payload_factor" : {
+	                "tasteTypes" : [ "spicy" ] 
+	             }
+	          ]
+	        }
+	    }
+	}
+
+
+
 ## Installation
 
 mvn clean install -DskipTests
