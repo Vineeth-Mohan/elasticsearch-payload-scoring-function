@@ -54,10 +54,11 @@ The distribution would be present in target/releases
 
 unzip and copy the zip file in there to the plugin folder
 
-
-
 Do not forget to restart the node after installing.
 
+To install using plugin
+
+	./bin/plugin -install payload-scoring -url  http://factweavers.com/repository/com/factweavers/elasticsearch/plugin/elasticsearch-payload-scoring-function/1.7.0.0/elasticsearch-payload-scoring-function-1.7.0.0-plugin.zip
 
 
 
