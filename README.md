@@ -17,13 +17,13 @@ The payload value is taken from termVectors if enabled ( This is faster ) or fro
 Sample documentA <br/>
 	{
 	"name" : "chilli chicken",
-	"tasteTypes" : [ "spicy" , "salty" , "gravy" ]   // ( A lot of gravy and very spicy )
+	"tasteTypes" : [ "spicy|100" , "salty|10" , "gravy|100" ]   // ( A lot of gravy and very spicy )
 	}
 
 Sample documentB <br/>
 	{
 	"name" : "Chicken with nuts",
-	"tasteTypes" : [ "spicy" , "sweet" , "gravy" ]  // ( Thick gravy bu not very spicy )
+	"tasteTypes" : [ "spicy|20" , "sweet" , "gravy|100" ]  // ( Lot of gravy gravy bu not very spicy )
 	}
 
 Here as you can see the level of spicy and gravy is different for different dishes.
@@ -36,15 +36,15 @@ In such cases , using the plugin i made , we can give search as follows -
 	           "function_score" : {
 	                    "query" : {    "term" : "spicy" },
 	                     "functions" : [
-	                            "payload_factor" : {
-	                "tasteTypes" : [ "spicy" ] 
+	                        "payload_factor" : {
+	                        "tasteTypes" : [ "spicy" ] 
 	             }
 	          ]
 	        }
 	    }
 	}
 
-
+The result will have documentA as the highest score.
 
 ## Installation
 
