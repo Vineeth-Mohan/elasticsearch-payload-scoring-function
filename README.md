@@ -15,16 +15,30 @@ The payload value is taken from termVectors if enabled ( This is faster ) or fro
 ## Sample usecase
 
 Sample documentA <br/>
-	{
-	"name" : "chilli chicken",
-	"tasteTypes" : [ "spicy|100" , "salty|10" , "gravy|100" ]   // ( A lot of gravy and very spicy )
-	}
+  ( A lot of gravy and very spicy )
+
+		{
+		  "name": "chilli chicken",
+		  "tasteTypes": [
+		    "spicy|100",
+		    "salty|10",
+		    "gravy|100"
+		  ]
+		}
 
 Sample documentB <br/>
-	{
-	"name" : "Chicken with nuts",
-	"tasteTypes" : [ "spicy|20" , "sweet" , "gravy|100" ]  // ( Lot of gravy gravy bu not very spicy )
-	}
+
+ ( Lot of gravy gravy bu not very spicy )
+
+		{
+		  "name": "Chicken with nuts",
+		  "tasteTypes": [
+		    "spicy|20",
+		    "sweet",
+		    "gravy|100"
+		  ]
+		}
+
 
 Here as you can see the level of spicy and gravy is different for different dishes.
 So when i search for dishes which are spicy , it makes sense to show "chilli chicken" above "chicken with nuts" as the former is more spicy.
@@ -67,7 +81,7 @@ To install using plugin
 All feedback is welcome! If you find issues, please post them at [Github](https://github.com/Vineeth-Mohan/elasticsearch-payload-scoring-function/issues)
 
 
-Example
+## Example
 
 	curl -XDELETE 'localhost:9200/test'
 
