@@ -45,18 +45,24 @@ So when i search for dishes which are spicy , it makes sense to show "chilli chi
 
 In such cases , using the plugin i made , we can give search as follows -
 
-	{
-	  "query" : {
-	           "function_score" : {
-	                    "query" : {    "term" : "spicy" },
-	                     "functions" : [
-	                        "payload_factor" : {
-	                        "tasteTypes" : [ "spicy" ] 
-	             }
-	          ]
-	        }
-	    }
-	}
+		{
+		  "query": {
+		    "function_score": {
+		      "query": {
+		        "term": "spicy"
+		      },
+		      "functions": [
+		        {
+		          "payload_factor": {
+		            "tasteTypes": [
+		              "spicy"
+		            ]
+		          }
+		        }
+		      ]
+		    }
+		  }
+		}
 
 The result will have documentA as the highest score.
 
