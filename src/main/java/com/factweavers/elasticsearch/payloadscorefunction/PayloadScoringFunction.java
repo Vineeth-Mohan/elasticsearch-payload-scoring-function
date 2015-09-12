@@ -69,6 +69,7 @@ public class PayloadScoringFunction extends ScoreFunction {
 	public double score(int docId, float subQueryScore) {
 		indexLookup.setNextDocId(docId);
 		float score = 0;
+		int obtainedTerms = 0;
 		try {
 			Fields termVectors = indexLookup.termVectors();
 			Boolean isPayloadOrIndex = false;
@@ -82,12 +83,15 @@ public class PayloadScoringFunction extends ScoreFunction {
 
 			if (isPayloadOrIndex) {
 				BytesRef firstElement = iterator.next();
-				while (firstElement != null) {
+				while (firstElement != null && (obtainedTerms < values.size()) ) {
 					String currentValue = firstElement.utf8ToString();
 					if (!values.contains(currentValue)) {
 						//logger.info("Payload Skipping " + currentValue);
 						firstElement = iterator.next();
 						continue;
+					}
+					else{
+						obtainedTerms++;
 					}
 					//logger.info("Payload processing value is " + currentValue);
 					DocsAndPositionsEnum docsAndPositions = iterator
