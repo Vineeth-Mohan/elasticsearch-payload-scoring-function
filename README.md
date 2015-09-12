@@ -12,6 +12,60 @@ The payload value is taken from termVectors if enabled ( This is faster ) or fro
 | 1.7.0          | 1.7.0.0        | Sept 7, 2015 |
 
 
+## Sample usecase
+
+Sample documentA <br/>
+  ( A lot of gravy and very spicy )
+
+		{
+		  "name": "chilli chicken",
+		  "tasteTypes": [
+		    "spicy|100",
+		    "salty|10",
+		    "gravy|100"
+		  ]
+		}
+
+Sample documentB <br/>
+
+ ( Lot of gravy gravy bu not very spicy )
+
+		{
+		  "name": "Chicken with nuts",
+		  "tasteTypes": [
+		    "spicy|20",
+		    "sweet",
+		    "gravy|100"
+		  ]
+		}
+
+
+Here as you can see the level of spicy and gravy is different for different dishes.
+So when i search for dishes which are spicy , it makes sense to show "chilli chicken" above "chicken with nuts" as the former is more spicy.
+
+In such cases , using the plugin i made , we can give search as follows -
+
+		{
+		  "query": {
+		    "function_score": {
+		      "query": {
+		        "term": "spicy"
+		      },
+		      "functions": [
+		        {
+		          "payload_factor": {
+		            "tasteTypes": [
+		              "spicy"
+		            ]
+		          }
+		        }
+		      ]
+		    }
+		  }
+		}
+
+The result will have documentA as the highest score.
+
 ## Installation
 
 mvn clean install -DskipTests
@@ -20,10 +74,11 @@ The distribution would be present in target/releases
 
 unzip and copy the zip file in there to the plugin folder
 
-
-
 Do not forget to restart the node after installing.
 
+To install using plugin
+
+	./bin/plugin -install payload-scoring -url  http://factweavers.com/repository/com/factweavers/elasticsearch/plugin/elasticsearch-payload-scoring-function/1.7.0.0/elasticsearch-payload-scoring-function-1.7.0.0-plugin.zip
 
 
 
@@ -32,7 +87,7 @@ Do not forget to restart the node after installing.
 All feedback is welcome! If you find issues, please post them at [Github](https://github.com/Vineeth-Mohan/elasticsearch-payload-scoring-function/issues)
 
 
-Example
+## Example
 
 	curl -XDELETE 'localhost:9200/test'
 
