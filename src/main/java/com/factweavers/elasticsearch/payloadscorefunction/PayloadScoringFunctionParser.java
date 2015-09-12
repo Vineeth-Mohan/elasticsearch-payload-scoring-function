@@ -48,8 +48,8 @@ import java.util.Locale;
  */
 public class PayloadScoringFunctionParser implements ScoreFunctionParser {
 	public static String[] NAMES = { "payload_factor", "payloadFactor" };
-	private ESLogger logger = Loggers
-			.getLogger(PayloadScoringFunctionParser.class);
+	//private ESLogger logger = Loggers
+	//		.getLogger(PayloadScoringFunctionParser.class);
 
 
 	@Override
@@ -62,7 +62,7 @@ public class PayloadScoringFunctionParser implements ScoreFunctionParser {
 		XContentParser.Token token;
 
 		while ((token = parser.nextToken()) != XContentParser.Token.END_OBJECT) {
-			logger.info("Token type is " + token);
+			//logger.info("Token type is " + token);
 			if (token == XContentParser.Token.FIELD_NAME) {
 				currentFieldName = parser.currentName();
 			} else if (token.isValue()) {

@@ -49,7 +49,7 @@ public class PayloadScoringFunction extends ScoreFunction {
 	private final List<String> values;
 	private float defaultValue;
 	private IndexLookup indexLookup;
-	private ESLogger logger = Loggers.getLogger(PayloadScoringFunction.class);
+	//private ESLogger logger = Loggers.getLogger(PayloadScoringFunction.class);
 
 	public PayloadScoringFunction(IndexLookup indexLookup, String field,
 			List<String> values, float defaultValue) {
@@ -85,11 +85,11 @@ public class PayloadScoringFunction extends ScoreFunction {
 				while (firstElement != null) {
 					String currentValue = firstElement.utf8ToString();
 					if (!values.contains(currentValue)) {
-						logger.info("Payload Skipping " + currentValue);
+						//logger.info("Payload Skipping " + currentValue);
 						firstElement = iterator.next();
 						continue;
 					}
-					logger.info("Payload processing value is " + currentValue);
+					//logger.info("Payload processing value is " + currentValue);
 					DocsAndPositionsEnum docsAndPositions = iterator
 							.docsAndPositions(null, null);
 					docsAndPositions.nextDoc();
@@ -98,7 +98,7 @@ public class PayloadScoringFunction extends ScoreFunction {
 					if (payload != null) {
 						score += PayloadHelper.decodeFloat(payload.bytes,
 								payload.offset);
-						logger.info("Score " + score);
+						//logger.info("Score " + score);
 					}
 					else{
 						score += defaultValue;
@@ -111,8 +111,8 @@ public class PayloadScoringFunction extends ScoreFunction {
 					IndexFieldTerm tokens = fieldObject.get(value,
 							IndexLookup.FLAG_CACHE | IndexLookup.FLAG_PAYLOADS);
 					if (fieldObject != null && tokens != null) {
-						logger.info("Processing docID=" + docId + " " + field
-								+ " for " + value + " , " + tokens);
+						//logger.info("Processing docID=" + docId + " " + field
+						//		+ " for " + value + " , " + tokens);
 						if (tokens.iterator().hasNext()) {
 							score += tokens.iterator().next().payloadAsFloat(defaultValue);
 						}
@@ -121,7 +121,7 @@ public class PayloadScoringFunction extends ScoreFunction {
 				}
 			}
 		} catch (IOException e) {
-			logger.info("Exception in Term Vectors");
+			//logger.info("Exception in Term Vectors");
 			e.printStackTrace();
 		}
 		return new Double(score);
